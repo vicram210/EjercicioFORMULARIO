@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <h1>Formulario</h1>
+    <form onsubmit="validaCampos()">
+        <div>
+            <label for="id_nombre">Nombre:</label>
+            <input type="text" name="nombre" id="id_nombre" value="Ingrese su nombre" required>
+        </div>
+
+        <div>
+            <label for="id_apellido">Apellidos:</label>
+            <input type="text" name="apellido" id="id_apellido" value="Ingrese sus apellidos" required>
+        </div>
+
+        <div>
+            <label for="id_edad">Edad:</label>
+            <input type="text" name="edad" id="id_edad" value="Ingrese su edad" required>
+        </div>
+
+        <div>
+            <label for="id_sexo">Sexo:</label>
+            <input type="radio" name="sexo" id="id_masculino"> Masculino
+            <input type="radio" name="sexo" id="id_femenino"> Femenino
+        </div>
+
+        <div>
+            <label for="id_familiar_hombre">Situación Familiar:</label>
+            <select name="situacionH" id="id_situacion_hombre">
+                <option value=""></option>
+                <option value="soltero">Soltero</option>
+                <option value="casado">Casado</option>
+                <option value="divorciado">Divorciado</option>
+                <option value="viudo">Viudo</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="id_familiar_mujer">Situación Familiar:</label>
+            <select name="situacionM" id="id_situacion_mujer">
+                <option value="" hidden>Selecciona una opcion</option>
+                <option value="soltera">Soltera</option>
+                <option value="casada">Casada</option>
+                <option value="divorciada">Divorciada</option>
+                <option value="viuda">Viuda</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="id_email">Email:</label>
+            <input type="text" name="email" id="id_email" value="Ingrese su correo electrónico" required>
+        </div>
+
+        <div>
+            <label for="id_telefono">Teléfono:</label>
+            <input type="text" name="telefono" id="id_telefono" value="Ingrese su número de teléfono">
+        </div>
+
+        <div>
+            <button type="submit" onclick="validaCampos()">Enviar</button>
+        </div>
+    </form>
+</body>
+
+<script>
+
+</script>
+</html>
