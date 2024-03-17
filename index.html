@@ -4,67 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
+    <style>
+        input[type="text"],
+        select,
+        button[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            display: block;
+        }
+
+
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 8px 16px;
+            width: auto;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #id_femenino {
+            margin-bottom: 20px;
+        }
+
+        .error-message{
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>Formulario</h1>
-    <form onsubmit="return validaCampos()">
-        <div>
+    <div class="container">
+        <h1>Formulario</h1>
+        <form onsubmit="return validaCampos()">
             <label for="id_nombre">Nombre:</label>
             <input type="text" name="nombre" id="id_nombre" value="Ingrese su nombre" required>
-        </div>
 
-        <div>
             <label for="id_apellido">Apellidos:</label>
             <input type="text" name="apellido" id="id_apellido" value="Ingrese sus apellidos" required>
-        </div>
 
-        <div>
             <label for="id_edad">Edad:</label>
             <input type="text" name="edad" id="id_edad" value="Ingrese su edad" required>
-        </div>
 
-        <div>
-            <label for="id_sexo">Sexo:</label>
-            <select name="sexo" id="id_sexo" onchange="cambiarSituacionFamiliar()">
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-            </select>
-        </div>
+            
+            <div>
+                Sexo:
+                <input type="radio" name="sexo" id="id_masculino" value="masculino" onchange="cambiarSituacionFamiliar()">
+                <label for="id_masculino">Masculino</label>
+                <input type="radio" name="sexo" id="id_femenino" value="femenino" onchange="cambiarSituacionFamiliar()">
+                <label for="id_femenino">Femenino</label>
+            </div>
 
-        <div>
             <label for="id_situacion">Situación Familiar:</label>
             <select name="situacion" id="id_situacion">
                 <option value="" hidden>Selecciona una opción</option>
-                <option value="soltero">Soltero</option>
-                <option value="casado">Casado</option>
-                <option value="divorciado">Divorciado</option>
-                <option value="viudo">Viudo</option>
             </select>
-        </div>
 
-        <div>
             <label for="id_email">Email:</label>
             <input type="text" name="email" id="id_email" value="Ingrese su correo electrónico" required>
-        </div>
 
-        <div>
             <label for="id_telefono">Teléfono:</label>
             <input type="text" name="telefono" id="id_telefono" value="Ingrese su número de teléfono">
-        </div>
 
-        <div>
+            <div class="error-message" id="id_mensaje_error"></div>
+
             <button type="submit">Enviar</button>
-        </div>
-
-        <div id="id_mensaje_error" style="color: red;"></div>
-    </form>
+        </form>
+    </div>
 
     <script>
         function validaCampos() {
             const nombre = document.getElementById("id_nombre").value;
             const apellido = document.getElementById("id_apellido").value;
             const edad = document.getElementById("id_edad").value;
-            const sexo = document.getElementById("id_sexo").value;
+            const sexo = document.querySelector('input[name="sexo"]:checked').value;
             const email = document.getElementById("id_email").value;
             const telefono = document.getElementById("id_telefono").value;
 
@@ -91,7 +117,25 @@
             return true;
         }
 
-        
+        function mostrarError(mensaje) {
+            document.getElementById("id_mensaje_error").innerText = mensaje;
+        }
+
+        function cambiarSituacionFamiliar() {
+            const sexo = document.querySelector('input[name="sexo"]:checked').value;
+            const situacionSelect = document.getElementById("id_situacion");
+
+            situacionSelect.innerHTML = "";
+
+            const situaciones = (sexo === "masculino") ? ["Soltero", "Casado", "Divorciado", "Viudo"] : ["Soltera", "Casada", "Divorciada", "Viuda"];
+
+            situaciones.forEach((situacion) => {
+                const option = document.createElement("option");
+                option.text = situacion;
+                option.value = situacion.toLowerCase();
+                situacionSelect.add(option);
+            });
+        }
     </script>
 </body>
 </html>
